@@ -1,6 +1,6 @@
 #! /bin/bash
 echo "-------------------------------------"
-echo "User Name: CHAE WOON"
+echo "User Name:CHUNG CHAE WOON"
 echo "Student Number: 12191675"
 echo "[ MENU ]"
 echo "1. Get the data of the movie identified by a specific
@@ -25,8 +25,8 @@ do
 			if [ $agree = "y" ];
 			then
 				temp=$(awk -v num=1 -F\| '$7==num {printf("%s %s\n",$1,$2)}' ./u.item |head);
-				echo -e $temp
-			
+				echo ""
+    				echo -e "$temp\n"
 			fi 
 			;;
 		3) read -p "Please enter the 'movie id' (1~1682): " movieid
@@ -40,19 +40,18 @@ do
 		4) read -p "Do you want to delete the 'IMDb URL' from 'u.item'?(y/n):" agree
 			if [ $agree = "y" ];
 			then
-				echo $(awk -F\| '{print $0}' ./u.item|sed 's/http[^)]*)//'|head);
-
+				echo -e "$(awk -F\| '{print $0}' ./u.item|sed 's/http[^)]*)//'|head)\n"
 				echo " "
 			fi;;
 		5) read -p "Do you want to get the data about users from 'u.user'?(y/n):" agree
 			if [ $agree = "y" ];
 			then
-				echo -e  $(awk -F\| '{printf("user %s is %s years old %s %s\n",$1,$2,$3,$4)}' ./u.user| sed -E 's/M/male/'| sed -E 's/F/female/' |head);
+				echo -e  "$(awk -F\| '{printf("user %s is %s years old %s %s\n",$1,$2,$3,$4)}' ./u.user| sed -E 's/M/male/'| sed -E 's/F/female/' |head)\n"
 			fi;;
 		6) read -p "Do you want to Modify the format of 'release data' in 'u.item'?(y/n):" agree
 			if [ $agree = "y" ];
 			then
-				echo -e $(awk -F\| '{print $0}' ./u.item |sed 's/Jan/01/; s/Feb/02/; s/Mar/03/; s/Apr/04/; s/May/05/; s/Jun/06/; s/Jul/07/; s/Aug/08/; s/Sep/09/; s/Oct/10/; s/Nov/11/; s/Dec/12/;'|sed 's/\([0-9][0-9]\)-\([0-9][0-9]\)-\([0-9][0-9][0-9][0-9]\)/\3\2\1/'|tail);
+				echo -e "$(awk -F\| '{print $0}' ./u.item |sed 's/Jan/01/; s/Feb/02/; s/Mar/03/; s/Apr/04/; s/May/05/; s/Jun/06/; s/Jul/07/; s/Aug/08/; s/Sep/09/; s/Oct/10/; s/Nov/11/; s/Dec/12/;'|sed 's/\([0-9][0-9]\)-\([0-9][0-9]\)-\([0-9][0-9][0-9][0-9]\)/\3\2\1/'|tail)\n"
 			fi;;
 		7) read -p "Please enter the 'user id'(1~943):" userid
 			temp=$(awk -v num=$userid -F'\t' '$1==num{printf(" %s |\n",$2)}' ./u.data|sort -n);
